@@ -1,0 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_section_KkF4Fy": {
+      "type": "hero_section",
+      "settings": {
+        "hero_image": "shopify://shop_images/shop_bg.jpg",
+        "hero_heading": "elevate your drive! 35% off",
+        "hero_dec": "<p>our upgraded fragrance kit</p>",
+        "btn_text": "shop now",
+        "btn_url": "shopify://collections",
+        "position": "center",
+        "alignment": "center"
+      }
+    },
+    "shop_our_section_gFTRaC": {
+      "type": "shop_our_section",
+      "blocks": {
+        "block_k38FEH": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/shop_1_d5e9bc73-f41d-4e9e-a932-2ec2a9e10467.jpg",
+            "Coll_url": "shopify://collections/shoes",
+            "title": "kids shoes"
+          }
+        },
+        "block_d3wgU4": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/look008_02.webp",
+            "Coll_url": "shopify://collections/mans",
+            "title": "man"
+          }
+        },
+        "block_qheMU4": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/look026_03.webp",
+            "Coll_url": "shopify://collections/womans",
+            "title": "woman"
+          }
+        },
+        "block_tbU9Hr": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/shop_4_91cdcb50-37bc-4591-9d28-b3b1668a0315.jpg",
+            "Coll_url": "shopify://collections/bags",
+            "title": "bags"
+          }
+        },
+        "block_3tffaV": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/shop_1_4990851d-f1d9-4401-aafa-80c47a9083b7.jpg",
+            "Coll_url": "shopify://collections/shoes",
+            "title": "shoes"
+          }
+        },
+        "block_jjtQcM": {
+          "type": "Block",
+          "settings": {
+            "image": "shopify://shop_images/Holiday_Glam_1552_Gabriel_Sweet_Photography.png",
+            "Coll_url": "shopify://collections",
+            "title": "beauty"
+          }
+        }
+      },
+      "block_order": [
+        "block_k38FEH",
+        "block_d3wgU4",
+        "block_qheMU4",
+        "block_tbU9Hr",
+        "block_3tffaV",
+        "block_jjtQcM"
+      ],
+      "settings": {
+        "shop_heading": "shop by produtc"
+      }
+    },
+    "bg_img_section_hMUqMQ": {
+      "type": "bg_img_section",
+      "settings": {
+        "bg_video": "shopify://files/videos/donna1_24.mp4"
+      }
+    },
+    "faq_section_68M7QX": {
+      "type": "Faq-section",
+      "disabled": true,
+      "settings": {}
+    },
+    "mary_jane_section_9RhGdA": {
+      "type": "Mary-jane-section",
+      "settings": {
+        "shop_url": "shopify://collections/shoes",
+        "mery_img": "shopify://shop_images/11.22_HP_Desktop_2_qk4ErgwWhs.gif",
+        "sub_heading": "<p>GRAND DEBUT</p>",
+        "heading": "The Ballet Mary Jane",
+        "button_text": "SHOP NEW & ON SALE"
+      }
+    }
+  },
+  "order": [
+    "hero_section_KkF4Fy",
+    "shop_our_section_gFTRaC",
+    "bg_img_section_hMUqMQ",
+    "faq_section_68M7QX",
+    "mary_jane_section_9RhGdA"
+  ]
+}

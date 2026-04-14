@@ -1,0 +1,100 @@
+<section class="hero_section">
+  <div class="hero_section">
+    <div class="hero_inner">
+        {% if section.settings.hero_image %}
+          <img src="{{ section.settings.hero_image | img_url: 'master' }}" alt="Hero Image">
+        {% endif %}
+    </div>
+    <div class="hero_info text_{{ section.settings.position }}_{{ section.settings.alignment }}">
+      <div class="hero_info_inner">
+        <h1> {{ section.settings.hero_heading }}</h1>
+        <p> {{ section.settings.hero_dec }}</p>
+        <div class="primary_btn_wpr">
+         <a href="{{ section.settings.btn_url }}" class="primary_btn"> {{ section.settings.btn_text }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero Title",
+    },
+    {
+      "type": "richtext",
+      "id": "hero_dec",
+      "label": "Hero decrip",
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Hero Button",
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top"
+   },
+   {
+    "type": "select",
+    "id": "alignment",
+    "label": "Alignment",
+    "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+   },
+  ],
+  "presets": [
+    {
+      "name": "Hero sections"
+    }
+  ]
+}
+
+
+{% endschema %}

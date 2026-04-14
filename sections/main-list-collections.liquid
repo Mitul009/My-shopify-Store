@@ -1,0 +1,27 @@
+
+<section class="col_grid_wp">
+  <div class="col_grid_inner">
+      {% for collection in collections %}
+        {% for product in collection.products %}
+          {% render 'product-grid', product: product %}
+        {% endfor %}
+      {% endfor %}
+  </div>
+</section>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

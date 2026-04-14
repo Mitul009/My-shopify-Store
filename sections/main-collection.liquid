@@ -1,0 +1,70 @@
+{% paginate collection.products by limit: 10 %}
+<section class="main_collection_section">
+  <div class="container">
+    <div class="collection_wpr">
+      <div class="collection_title">
+        <h2>{{ collection.title }}</h2>
+      </div>
+      <div class="collection_filter">
+        <div class="collection_left">
+          <ul class="custom_filter">
+            <li class="custom-sort">
+              <a href="#">Featured</a>
+            </li>
+            <li class="custom-sort">
+              <a href="#">Best selling</a>
+            </li>
+            <li class="sort_filter">
+              <select name="sort" class="nice-select" id="sort-by" style="display:none">
+                <option value="sort-by">Sort by</option>
+                  <option value="title-ascending">
+                    Alphabetically, A-Z
+                  </option>
+                  <option value="title-descending">
+                    Alphabetically, Z-A
+                  </option>
+                  <option value="price-ascending">
+                    Price, low to high
+                  </option>
+                  <option value="price-descending">
+                    Price, high to low
+                  </option>
+               </select>
+            </li>
+          </ul>
+        </div>
+        <div class="collection_right">
+          <div class="filter_main">
+            <div class="">
+              
+            </div>
+            <div class="filter_open_link">
+              <a href="#" class="link_btn">filters</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="col_grid_wp">
+  <div class="col_grid_inner">
+      {% for product in collection.products %}
+        {% include 'product-grid' %}
+      {% endfor %}
+  </div>
+    {%- if paginate.pages > 1 -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endif -%}
+</section>
+{% endpaginate %}  
+
+
+
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}

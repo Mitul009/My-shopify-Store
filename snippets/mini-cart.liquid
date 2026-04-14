@@ -1,0 +1,76 @@
+<div class="cart_overlay"></div>
+<div class="cart_main">
+  <div class="cart_inner">
+    <div class="cart_header flex align-center justify-between">
+      <h4>cart</h4>
+      <a href="#" class="cart_close">
+        {% render 'all_svg_icon', icon_name: 'search_close' %}
+      </a>
+    </div>
+    <div class="header_center">
+        {% if cart.item_count < 1 %}
+          <div class="empty_bag">
+            <div class="empty_bag_icon">
+             {% render 'all_svg_icon', icon_name: 'basket_icon' %}
+            </div>
+            <div class="empty_text">
+              <h6>{{ 'cart.general.empty' | t }}</h6>
+              <p>{{ 'cart.general.continue_shopping_message' | t }}</p>
+            </div>
+            <a href="{{ routes.all_products_collection_url }}" class="lavender_btn">
+              {{- 'cart.general.continue_shopping' | t -}}
+            </a>
+          </div>
+        {% endif %}
+      <form action="{{ routes.cart_url }}" id="CartDrawer-Form"  method="post">
+        <div class="drawer_body_top">
+          <div class="drawer_item_wp">
+            {% for item in cart.items %}
+              <div class="dr_items_inner">
+                <div class="dr_image_wp">
+                  <a href="{{ item.url }}">
+                    <img src="{{ item.image | img_url: 'master' }}" loading="lazy" alt="{{ item.product.title }}">
+                  </a>
+                </div>
+                <div class="dr_content_wp">
+                  <h3>
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                  </h3>
+                  <div class="dr_price_main">
+                    <div class="dr_item_price">
+                      <h4>{{ item.final_line_price | money }}</h4>
+                    </div>
+                  </div>
+                    <div class="dr_qty_btn">
+                      <button class="qty_btn qty_minus" data-variant="{{ item.variant.id }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#000000" d="M19 13H5v-2h14z"/></svg>
+                      </button>
+                      <input class="qty_number" type="number" value="{{ item.quantity }}" data-invontry="{{ item.variant.inventory_quantity }}" max="{{ item.variant.inventory_quantity }}">
+                      <button class="qty_btn qty_plus" data-variant="{{ item.variant.id }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#000000" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="remove_items" data-variant="{{ item.variant.id }}">
+                      <a href="javascript:void(0)">{{ 'cart.general.remove' | t }}</a>
+                  </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="cart_footer">
+      <div class="cart_total">
+        <h3>{{ 'cart.general.estimated_msg' | t }}</h3>
+        <h5>{{ cart.total_price | money }}</h5>
+      </div>
+      {% if additional_checkout_buttons %}
+          {{ content_for_additional_checkout_buttons }}
+      {% endif %}
+      <button type="submit" name="checkout" form="CartDrawer-Form" class="checkout_btn">
+        {{ 'cart.general.checkout' | t }}
+      </button>
+    </div>
+  </div>
+</div>

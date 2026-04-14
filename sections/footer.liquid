@@ -1,0 +1,54 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer_wrapper">
+      <div class="footer_left">
+        <div class="footer_logo">
+          <a href="#">
+            {% render 'all_svg_icon', icon_name: 'header_logo' %}
+          </a>
+        </div>
+        <div class="footer_inn_info">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+          <form>
+            <input type="email" placeholder="email">
+            <button type="submit">submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer_right">
+        <div class="footer_right_inner ">
+          <ul class="footer_menu flex">
+            {% for footer_menu in section.settings.footer_menu_list.links %}
+            <li>
+              <a href="#">{{ footer_menu.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_menu_list",
+        "label": "menu_list"
+      },
+    ],
+    "presets": [
+      {
+      "name": "Footer section"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,210 @@
+<section class="product_hero_section">
+  <div class="container">
+    <div class="product_hero flex">
+      <div class="product_hero_left">
+        <div class="product_slider_main">
+          <div class="product_mian_slider swiper">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-thumbnail-alt="{{ media.alt }}">
+                  <div class="product_mian_slide">
+                    <div
+                      class="product_mian_img"
+                      {% if product.selected_or_first_available_variant.featured_media.alt != media.alt
+                        and product.selected_or_first_available_variant.featured_media.alt != blank
+                      %}
+                      {% endif %}
+                    >
+                      {% if media.media_type == 'image' %}
+                        <img src="{{ media.src | img_url: 'master' }}" class="image-zoom" width="100%" height="100%">
+                      {% elsif media.media_type == 'video' %}
+                        {{ media | video_tag: autoplay: true, loop: true }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="product_thumb swiper">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide" data-thumbnail-alt="{{ media.alt }}">
+                  <div class="thumb_slide">
+                    <div
+                      class="thumb_slide_img"
+                      {% if product.selected_or_first_available_variant.featured_media.alt != media.alt
+                        and product.selected_or_first_available_variant.featured_media.alt != blank
+                      %}
+                      {% endif %}
+                    >
+                      {% if media.media_type == 'image' %}
+                        <img src="{{ media.src | img_url: 'master' }}" alt="Product Image" width="100%" height="100%">
+                      {% elsif media.media_type == 'video' %}
+                        {{ media | video_tag: autoplay: true, loop: true }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product_hero_right">
+        <form id="AddToCartForm" class="form_addtocart">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <div class="product_hero_info">
+            <div class="product_heading">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.description }}</p>
+            </div>
+            <div class="product_size_wpr">
+              <div class="product_size_option">
+                {% for option in product.options_with_values %}
+                  <div class="product_option">
+                    <h4>{{ option.name }}</h4>
+                    <div class="product_size_col">
+                      {% for value in option.values %}
+                        <input
+                          type="radio"
+                          name="{{ option.name }}"
+                          id="size_{{ forloop.parentloop.index }}_{{ forloop.index }}"
+                          value="{{ value }}"
+                          {% if value.selected %}checked{% endif %}
+                        >
+                        {% if option.name == 'Color' %}
+                          {%- liquid
+                            assign swatch_value = null
+                            if value.swatch.image
+                              assign image_url = value.swatch.image | image_url: width: 50
+                              assign swatch_value = 'url(' | append: image_url | append: ')'
+                              assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                            elsif value.swatch.color
+                              assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                            endif
+                          -%}
+                          <label
+                            class="color_piker"
+                            for="size_{{ forloop.parentloop.index }}_{{ forloop.index }}"
+                            style="background-color:{{ swatch_value }}"
+                          >
+                            {{- value -}}
+                          </label>
+                        {% else %}
+                          <label for="size_{{ forloop.parentloop.index }}_{{ forloop.index }}">{{ value }}</label>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+                <select
+                  style="display: none"
+                  id="ProductSelect-product-template"
+                  class="product-form__variants no-js"
+                  name="id"
+                  data-productid="{{product.id}}"
+                >
+                  {% for option in product.variants %}
+                    <option
+                      value="{{option.id}}"
+                      {% if forloop.first %}
+                        selected
+                      {% endif %}
+                    >
+                      {{ option.title }} 
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="product_price_and_review">
+              {% assign compare_price = product.compare_at_price %}
+              {% assign discount = compare_price
+                | minus: product.price
+                | times: 100.0
+                | divided_by: compare_price
+                | money_without_currency
+                | times: 100
+                | remove: '.0'
+              %}
+              <div class="product_price">
+                <h5>{{ product.price | money }}</h5>
+                {% if compare_price != blank %}
+                  <h5 class="com_price">{{ compare_price | money -}}</h5>
+                {% endif %}
+              </div>
+            </div>
+            <div class="quantity_addto">
+              <div class="quantity_wpr">
+                <div class="quantity_inner">
+                  <button class="quantity_btn minus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
+                      <path fill="#000000" d="M19 13H5v-2h14z"/>
+                    </svg>
+                  </button>
+                  <input type="number" name="quantity" value="1" min="1" max="10">
+                  <button class="quantity_btn plus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
+                      <path fill="#000000" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="product_review">
+                <div class="jdgm-widget jdgm-preview-badge">
+                  {{ card_product.metafields.judgeme.badge }}
+                </div>
+              </div>
+            </div>
+            <div class="add-to-bag">
+              <a href="javascript:void(0)" class="add-to-gab-btn">
+                {%- if product.selected_or_first_available_variant.available == false -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- else -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- endif -%}
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    //====================== PRODUCT_SLIDER
+   var product_thumb = new Swiper(".product_thumb", {
+      slidesPerView: 5,
+       spaceBetween: 10,
+       direction: "vertical",
+    });
+    var swiper2 = new Swiper(".product_mian_slider", {
+      slidesPerView: 'auto',
+      thumbs: {
+        swiper: product_thumb
+      }
+    });
+
+    var selectCallback = function(variant, selector) {
+        console.log(variant, "variant");
+        if(variant.featured_media && document.querySelector('.product_mian_slider').swiper){
+          document.querySelector('.product_mian_slider').swiper.slideTo(variant.featured_media.position - 1)
+        }
+      };
+
+      jQuery(function($) {
+        var history_enable = false;
+        new Shopify.OptionSelectors("ProductSelect-product-template", { product: {{ product | json }} , onVariantSelected: selectCallback , enableHistoryState: history_enable });
+      });
+
+</script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": []
+}
+{% endschema %}

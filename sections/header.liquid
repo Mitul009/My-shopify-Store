@@ -1,0 +1,125 @@
+<header class="header">
+  <div class="header_wrapper">
+    <div class="container">
+      <div class="header_top flex align-center justify-between">
+        <div class="mobile_toggle_wpr">
+          <div class="mobile_toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="mobile_search">
+            <a href="javascript:void(0)">
+              {% render 'all_svg_icon', icon_name: 'search_icon' %}
+            </a>
+          </div>
+        </div>
+        <div class="header_logo">
+          <a href="{{ shop.url }}" class="logo_block">{{ section.settings.header_logo }}</a>
+        </div>
+        <div class="header_menu">
+          <div class="mob_menu_close">
+            <a href="javascript:void(0)" class="mob_menu_block">
+               {% render 'all_svg_icon', icon_name: 'close_icon' %}
+            </a>
+          </div>
+        <ul class="flex align-center justify-center">
+          {% for header-menu in section.settings.header_menu_list.links %}
+            <li class="menu_list">
+              <a href="{{ header-menu.url }}" class="menu_item">{{ header-menu.title }}</a>
+              {% if header-menu.links.size > 0 %}
+              <div class="megamenu_main">
+                <div class="container">
+                  <div class="megamenu flex ">
+                    <div class="megamenu_menu_wpr">
+                      <ul class="megamenu_menu flex">
+                      {% for child_link in header-menu.links %}
+                        {% assign image_url = child_link.object.metafields.custom.image | img_url: 'master' %}
+                        {% if image_url == blank and child_link.object.images != blank %}
+                          {% assign image_url = child_link.object.images.first | img_url: 'master' %}
+                        {% endif %}
+                        <li>
+                          <a href="{{ child_link.url }}" class="mega_inner_img_text">
+                            <div class="mega_meta_img">
+                              <img src="{{ image_url }}" alt="{{ child_link.title }}">
+                            </div>
+                            <span>{{ child_link.title }}</span>
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+        <div class="header_icon">
+          <ul class="flex align-center">
+            {% include 'search--bar' %}
+            <li class="account">
+              <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+                {% render 'all_svg_icon', icon_name: 'account_icon' %}
+              </a>
+            </li>
+            <li class="basket">
+              <a href="javascript:void(0)">
+                {% render 'all_svg_icon', icon_name: 'basket_icon' %}
+              </a>
+                {% render 'mini-cart' %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "html",
+        "id": "header_logo",
+        "label": "Header Logo"
+      },
+      {
+        "type": "link_list",
+        "id": "header_menu_list",
+        "label": "menu_list"
+      },
+      {
+        "type": "image_picker",
+        "id": "header_menu_img",
+        "label": "Header_menu_list"
+      },
+      {
+      "type": "select",
+      "id": "mega_menu_images_toggle",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "metafield",
+          "label": "Metafield"
+        }
+      ],
+      "default": "none",
+      "label": "Mega menu collection image type"
+    },
+    ],
+    "presets": [
+    {
+      "name": "header"
+    }
+    ]
+  }
+{% endschema %}

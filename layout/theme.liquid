@@ -1,0 +1,90 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  {%- if canonical_url != blank  -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}
+  {%- if settings.favicon != blank -%}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+  {%- capture seo_title -%}
+  {%- if request.page_type == 'search' and search.performed == true -%}
+  {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+  {%- else -%}
+  {{ page_title }}
+  {%- endif -%}
+  {%- if current_tags -%}
+  {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+  {%- endif -%}
+  {%- if current_page != 1 -%}
+  &ndash; {{ 'general.meta.page' | t: page: current_page }}
+  {%- endif -%}
+  {%- assign escaped_page_title = page_title | escape -%}
+  {%- unless escaped_page_title contains shop.name -%}
+  &ndash; {{ shop.name }}
+  {%- endunless -%}
+  {%- endcapture -%}
+
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% include 'social-meta-tags' %}
+
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+
+  {{ 'jquery.min.js' | asset_url | script_tag }}
+  {{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+
+  {%- if template contains 'customers' -%}
+  {{ 'customer.scss.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+  {%- endif -%}
+
+  <script src="{{ 'custom.js' |asset_url }}" defer="defer"></script>
+</head>
+<body class="template-{{ template | split: '.' | first }} body">
+  <!-- <div class="main_loader_wpr">
+    <div class="main_loader"></div>
+  </div> -->
+  <!-- <div class="coupon-wrapper">
+    <div class="coupon">
+      <div class="coupon_close">
+        <a href="javascript:void(0)" class="coupon_block">
+          <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="#f6f1eb" d="M20.48 3.512a11.97 11.97 0 0 0-8.486-3.514C5.366-.002-.007 5.371-.007 11.999c0 3.314 1.344 6.315 3.516 8.487A11.97 11.97 0 0 0 11.995 24c6.628 0 12.001-5.373 12.001-12.001c0-3.314-1.344-6.315-3.516-8.487m-1.542 15.427a9.8 9.8 0 0 1-6.943 2.876c-5.423 0-9.819-4.396-9.819-9.819a9.8 9.8 0 0 1 2.876-6.943a9.8 9.8 0 0 1 6.942-2.876c5.422 0 9.818 4.396 9.818 9.818a9.8 9.8 0 0 1-2.876 6.942z"></path><path fill="#f6f1eb" d="m13.537 12l3.855-3.855a1.091 1.091 0 0 0-1.542-1.541l.001-.001l-3.855 3.855l-3.855-3.855A1.091 1.091 0 0 0 6.6 8.145l-.001-.001l3.855 3.855l-3.855 3.855a1.091 1.091 0 1 0 1.541 1.542l.001-.001l3.855-3.855l3.855 3.855a1.091 1.091 0 1 0 1.542-1.541l-.001-.001z"></path></svg>
+        </a>
+      </div>
+      <div class="coupon_img">
+        <img src="https://d2pas86kykpvmq.cloudfront.net/images/promo/diamond.gif">
+      </div>
+      <div class="coupon_info">
+        <h3>Black Friday Get 50% OFF</h3>
+        <a href="https://mitulpcirkle.myshopify.com/collections/all" class="shop_link_btn">Shop now</a>
+        <p>Get premium 3d graphics for half the price!</p>
+      </div>
+    </div>
+  </div> -->
+  {% section 'Announcement-bar' %}
+  {% section 'header' %}
+  <div class="wrapper">
+    {{ content_for_layout }}
+  </div>
+  {% section 'footer' %}
+</body>
+</html>
+
+
+
+

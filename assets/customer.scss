@@ -1,0 +1,181 @@
+.user-cover {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid var(--TEXT-COLOR);
+}
+.account-title {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+.form-group input,
+.form-group select{
+  width: 100%;
+  background: var(--TEXT-COLOR);
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 400;
+  padding: 10px;
+  border: 0;
+  color: var(--BG-COLOR)
+}
+.form-group input::placeholder{
+  color: var(--BG-COLOR)
+}
+.form-group {
+  padding: 0 0 20px;
+}
+.button button.btn {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 10px 30px;
+  background: var(--TEXT-COLOR);
+  border: 0;
+  max-width: fit-content;
+  margin: auto;
+  display: block;
+  color: var(--BG-COLOR)
+}
+.form-group p{
+  text-align: center;
+}
+#CustomerLoginForm p a,
+#RecoverPasswordForm p a,
+.user-inner-box>p a{
+  color: var(--TEXT-COLOR);
+  text-align: center;
+  display: inline-block;
+}
+#CustomerLoginForm p,
+#RecoverPasswordForm p,
+.user-inner-box>p{
+  text-align: center;
+  line-height: 2;
+}
+.address-cover p br {
+  display: none;
+}
+.errors li {
+  color: #ff0000;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.user-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--TEXT-COLOR);
+}
+.account-navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.account-navigation ul a {
+  background: var(--TEXT-COLOR);
+  color: var(--BG-COLOR);
+  font-size: 18px;
+  padding: 10px 22px;
+  width: 100%;
+  display: block;
+}
+.account-navigation ul li {
+  flex: 0 0 25%;
+  padding: 0 15px;
+  text-align: center;
+}
+.account-navigation {
+  margin-bottom: 20px;
+}
+table.full {
+  width: 100%;
+  border-spacing: 5px;
+}
+table.full th {
+  padding: 10px;
+  background: var(--TEXT-COLOR);
+  color: var(--BG-COLOR);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border: 0;
+}
+table.full td {
+  color: var(--TEXT-COLOR);
+  padding: 10px 5px;
+  border-bottom: 1px solid var(--TEXT-COLOR);
+}
+table.full td a,
+.account-content p a{
+  color: var(--TEXT-COLOR);
+  font-weight: 500;
+}
+.btn-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-box .button {
+  width: 25%;
+  text-align: center;
+  padding: 0 20px;
+}
+.edit-address {
+  width: calc(50% - 40px);
+  text-align: center;
+  margin: 20px auto;
+}
+.btn-box .button a,
+.edit-address a.btn{
+  color: var(--BG-COLOR);
+  background: var(--TEXT-COLOR);
+  padding: 10px;
+  width: 100%;
+  display: block;
+}
+.address-cover p {
+  font-size: 22px;
+  margin: 0 0 20px;
+  font-weight: 700;
+  text-align: center;
+}
+.form-block {
+  max-width: 574px;
+  margin: auto;
+}
+.edit_add {
+  padding: 0 !important;
+}
+a.btn.cancel_form,
+.pt-20.button a{
+  color: var(--TEXT-COLOR);
+  text-decoration: underline;
+  font-size: 20px;
+  margin: 10px 0 0;
+  display: inline-block;
+}
+
+@media only screen and (max-width: 767px){
+  .account-title {
+    font-size: 26px;
+  }
+  .account-navigation ul li {
+    flex: 0 0 50%;
+    padding: 0 5px;
+  }
+  .account-navigation ul a {
+    font-size: 15px;
+  }
+  .account-navigation ul {
+    row-gap: 10px;
+  }
+  .btn-box .button {
+    width: 50%;
+    padding: 0 5px;
+  }
+  .edit-address {
+    width: calc(100% - 10px);
+  }
+}

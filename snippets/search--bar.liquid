@@ -1,0 +1,23 @@
+<li class="search">
+  <a href="javascript:void(0)">
+    {% render 'all_svg_icon', icon_name: 'search_icon' %}
+  </a>
+  <div class="search_bar_main">
+      <div class="search_close">
+        <a href="javascript:void(0)" class="search_block">
+          {% render 'all_svg_icon', icon_name: 'close_icon' %}
+        </a>
+      </div>
+    <div class="search_inner">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="text" id="searchInput" placeholder="{{ 'layout.search.search' | t }}" name="q" value="">
+        <input type="hidden" name="type" value="product">
+      </form>
+      <div class="search_hint">
+        <div class="result_box">
+           <ul id="searchResults" class="list-group"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

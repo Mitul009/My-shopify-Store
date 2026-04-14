@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon-Image"
+      }
+    ]
+  }
+]

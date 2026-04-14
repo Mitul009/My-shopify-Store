@@ -1,0 +1,32 @@
+<section class="bg_img_section">
+  <div class="bg_img_main">
+    <div class="bg_img_wpr"> 
+      {% if section.settings.bg_video != blank %}
+        <video autoplay muted loop playsinline>
+          <source src="{{ section.settings.bg_video | media_tag }}">
+        </video>
+      {% endif %}
+    </div>
+  </div>
+    <div class="demo">
+      
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "BG Videos",
+    "settings": [
+      {
+        "type": "video",
+        "id": "bg_video",
+        "label": "BG Video"
+      },
+    ],
+    "presets": [
+      {
+        "name": "BG section"
+      }
+    ]
+  }
+{% endschema %}

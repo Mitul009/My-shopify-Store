@@ -1,0 +1,73 @@
+<section class="shop_section">
+    <div class="shop_heading">
+      <h2>{{ section.settings.shop_heading }}</h2>
+    </div>
+    <div class="shop_main">
+      <div class="shop_slider swiper">
+        <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% if block.settings.image != blank %}
+                  <div class="swiper-slide">
+                    <div class="shop_slide">
+                      <a href="{{ block.settings.Coll_url | default: 'javascript:void(0)' }}" class="shop_block">
+                        {% if block.settings.image != blank %}
+                          <div class="shop_img_wpr">
+                            <img srcset="{{ block.settings.image | img_url: 'master' }}"  loading="lazy" alt="{{ block.settings.image.alt }}" />
+                          </div>
+                        {% endif %}
+                        {% if block.settings.title != blank %}
+                          <div class="shop_info">
+                            <h6>{{ block.settings.title }}</h6>
+                          </div>
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+              {% endif %}
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination shop_pagination"></div>
+      </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "shop our",
+    "settings": [
+      {
+        "type": "text",
+        "id": "shop_heading",
+        "label": "Shop Title",
+      },
+    ],
+    "blocks": [
+      {
+        "name": "Block",
+        "type": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "Coll_url",
+            "label": "Collection Link"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop_our_section"
+      }
+    ]
+  }
+{% endschema %}

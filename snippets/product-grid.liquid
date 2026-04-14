@@ -1,0 +1,58 @@
+{% comment %} {% assign compare_price = product.compare_at_price %}
+{% assign discount = compare_price
+  | minus: product.price
+  | times: 100.0
+  | divided_by: compare_price
+  | money_without_currency
+  | times: 100
+  | remove: '.0'
+%}
+ {% endcomment %}
+<div class="product_card " data-product="{{ product.handle }}">
+  <div class="product_card_inner">
+    {% if product.featured_image != blank %}
+      <div class="product_sliders swiper">
+        <div class="swiper-wrapper">
+          {% for media in product.media limit:3 %}
+            <div class="swiper-slide">
+              <div class="pr_card_img">
+                <a href="{{ product.url }}">
+                  <img src="{{ media | img_url: 'master' }}">
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next product_sliders_arrow">
+          {% render 'all_svg_icon', icon_name: 'product_arrow' %}
+        </div>
+        <div class="swiper-button-prev product_sliders_arrow">
+          {% render 'all_svg_icon', icon_name: 'product_arrow' %}
+        </div>
+        <div class="swiper-pagination product_sliders_pagination"></div>
+      </div>
+    {% endif %}
+      {% comment %}
+      <div class="pr_card_info">
+        <div class="product_title">
+          <h2>
+            <a href="{{ product.url }}">
+              {{ product.title }}
+            </a>
+          </h2>
+        </div>
+        <div class="product_price">
+          <h3>{{ product.price | money }}</h3>
+          {% if compare_price != blank %}
+            <h3 class="cmp_price">
+              {% if compare_price > product.price %} {{ discount }}% {% endif %} off {{ compare_price | money }} 
+            </h3>
+          {% endif %}
+        </div>
+        <div class="product_btn">
+          <a href="javascript:void(0)">Add to bag </a>
+        </div>
+      </div>
+      {% endcomment %}
+  </div>
+</div>
